@@ -37,14 +37,14 @@ class Checkout
     end
     rules = promotions.rules
     cost = promotions.send(rules[rules.index('price_discount')], cost) if cost > 60
-    p format_items items_scanned_hash
+    p 'Basket: ' +format_items(items_scanned_hash)
     p 'Total price expected: ' + cost.to_f.round(2).to_s
   end
 
   private
 
   def format_items items_scanned_hash
-    items_scanned_hash.inject('') { |m, (k, v)| m + "#{k} " * v }
+    items_scanned_hash.inject('') { |m, (k, v)| m + "#{k} " * v }.strip!
   end
 
   def get_price(item_id, quantity)
